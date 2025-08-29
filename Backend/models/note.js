@@ -7,11 +7,12 @@ const Note = new Schema({
 
     title: String,
     body: String,
-    user: {type:Schema.Types.ObjectId, ref:"User"}
+    user: {type:Schema.Types.ObjectId, ref:"User"},
+    isDone: Boolean
 
     
 })
 
 const NoteModel = mongoose.model("Notes", Note);
 
-module.exports= NoteModel;
+export default NoteModel;
