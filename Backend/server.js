@@ -12,9 +12,11 @@ app.use(express.json())
 
 app.get("/notes/", async(req, res)=>{
 
-    const notes = await NoteModel.find()
+    const notes = await NoteModel.find({})
 
-    console.log(notes);
+    res.json({
+        notes
+    })
     
     
 
