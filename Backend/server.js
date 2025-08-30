@@ -53,6 +53,33 @@ app.post("/notes", async(req, res)=>{
 
 })
 
+app.patch("/",(req, res)=>{
+
+})
+
+app.delete("/notes/:id", async(req, res)=>{
+    
+    const id = req.params.id
+    const noteId = new mongoose.Types.ObjectId(id)
+
+    console.log(id);
+
+    try{
+        await NoteModel.deleteOne({
+        _id:noteId
+    })
+
+    res.status(202).json({
+        message:"Note deleted"
+    })
+
+    }catch(e){
+        res.status(404)
+    }
+    
+
+})
+
 
 
 async function main(){
