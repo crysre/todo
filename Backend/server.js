@@ -53,7 +53,31 @@ app.post("/notes", async(req, res)=>{
 
 })
 
-app.patch("/",(req, res)=>{
+app.patch("/notes/:id", async(req, res)=>{
+    const title = req.body.title;
+    const body = req.body.body;
+    const isDone = req.body.isDone;
+
+    
+    const id = req.params.id
+    const noteId = new mongoose.Types.ObjectId(id)
+
+    try{
+        await NoteModel.findByIdAndUpdate({
+        _id:noteId
+    },
+    {$set:{title,body,isDone}}
+)
+
+res.status(200).json({
+    message:"note updated"
+})
+    }catch(e){
+        res.status(404).json({
+            message:"Message didn't get updated"
+        })
+    }
+
 
 })
 
