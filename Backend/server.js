@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { userAuth } from "./middleware/auth.js";
 
 import {handleSignup, handleLogin} from "./controllers/userController.js"
 
@@ -27,14 +28,14 @@ app.post("/login", handleLogin)
 
 
 
-app.get("/notes/", showAllNotes) 
+app.get("/notes/",userAuth, showAllNotes) 
 
 
-app.post("/notes", createNote) 
+app.post("/notes",userAuth, createNote) 
 
-app.patch("/notes/:id", updateNote) 
+app.patch("/notes/:id",userAuth, updateNote) 
 
-app.delete("/notes/:id", deleteNote) 
+app.delete("/notes/:id",userAuth, deleteNote) 
 
 
 

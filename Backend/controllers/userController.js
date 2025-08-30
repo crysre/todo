@@ -81,10 +81,12 @@ export const handleLogin = async (req, res)=>{
 
     let passwordCheck = await bcrypt.compare(password, user.password)
     
+    console.log(user._id);
+    
 
 
     if(passwordCheck){
-        const token = jwt.sign({id:email}, jwt_secret)
+        const token = jwt.sign({id:user._id}, jwt_secret)
 
         res.json({
             token
