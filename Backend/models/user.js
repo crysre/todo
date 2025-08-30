@@ -3,7 +3,7 @@ import mongoose from "mongoose"
 const Schema = mongoose.Schema;
 
 
-const User = newSchema({
+const User = new Schema({
     email:{type:String, unique:true, lowercase: true, required:true},
     firstName: String,
     lastName: String,
@@ -13,4 +13,4 @@ const User = newSchema({
 
 const UserModel = mongoose.model("users", User);
 
-module.exports= UserModel;
+export default UserModel;

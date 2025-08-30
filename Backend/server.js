@@ -1,14 +1,122 @@
 import express from "express";
-import dotenv from "dotenv"
-import NoteModel from "./models/note.js"
+import dotenv from "dotenv";
+import NoteModel from "./models/note.js";
+import UserModel from "./models/user.js";
 import mongoose from "mongoose";
+import {z} from "zod";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt"
+
 
 dotenv.config();
-
 
 const app = express();
 const port = process.env.port;
 app.use(express.json())
+const jwt_secret = process.env.JWT_SECRET
+
+
+
+
+
+
+
+app.post("/signup", async(req, res)=>{
+
+    const requiredBody = z.object({
+        email: z.email().min(3).max(50),
+        firstName: z.string().min(1).max(100),
+        lastName: z.string().min(2).max(50),
+        password: z.string().min(6).max(50)
+
+    })
+
+    const parsedData = requiredBody.safeParse(req.body)
+
+    if(!parsedData.success){
+        res.status(404).json({
+            message:"Invalid credentials"
+        })
+    }
+
+    const {email, password, firstName, lastName} = parsedData.data;
+
+    const hashedPassword = await bcrypt.hash(password, 5)
+
+    try{
+        await UserModel.create({
+        email,
+        password: hashedPassword,
+        firstName,
+        lastName
+    })
+
+    res.status(200).json({
+        message:"Signed up"
+    })
+    }catch(e){
+        res.status(404).json({
+            message:"Error while signing up"
+        })
+    }
+
+})
+
+app.post("/login", async(req, res)=>{
+
+        const requiredBody = z.object({
+        email: z.email().min(3).max(50),
+        password: z.string().min(6).max(50)
+
+    })
+
+    const parsedData = requiredBody.safeParse(req.body)
+
+    if(!parsedData.success){
+        res.status(404).json({
+            message:"Invalid credentials"
+        })
+    }
+
+    const {email, password} = parsedData.data;
+
+
+
+    try{
+        const user = await UserModel.findOne({
+        email
+    })
+
+    let passwordCheck = await bcrypt.compare(password, user.password)
+    
+
+
+    if(passwordCheck){
+        const token = jwt.sign({id:email}, jwt_secret)
+
+        res.json({
+            token
+        })
+
+        console.log(token);
+        
+    }else{
+        res.json({
+            message:"Wrong password"
+        })
+    }
+    }catch(e){
+        res.status(404).json({
+            message:"User doesn't exist"
+        })
+    }
+
+    
+
+})
+
+
+
 
 app.get("/notes/", async(req, res)=>{
 
