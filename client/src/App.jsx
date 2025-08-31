@@ -4,7 +4,9 @@
 function App() {
 
 
-  return 
+  return <>
+  Hi there
+  </>
 }
 
 export default App
