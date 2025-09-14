@@ -1,4 +1,7 @@
 import { useState } from "react";
+import submitNote from "../api/notes";
+
+
 
 function Create(){
 
@@ -7,8 +10,8 @@ function Create(){
         body:""
     });
 
-    function handleClick(){
-        console.log(note);
+    async function handleClick(){
+        await submitNote(note)
         
     }
 
