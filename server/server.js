@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { userAuth } from "./middleware/auth.js";
+import cors from "cors";
 
 import {handleSignup, handleLogin} from "./controllers/userController.js"
 
@@ -13,6 +14,7 @@ dotenv.config();
 const app = express();
 const port = process.env.port;
 app.use(express.json())
+app.use(cors());
 
 
 
@@ -31,7 +33,7 @@ app.post("/login", handleLogin)
 app.get("/notes/",userAuth, showAllNotes) 
 
 
-app.post("/notes",userAuth, createNote) 
+app.post("/notes", createNote) 
 
 app.patch("/notes/:id",userAuth, updateNote) 
 
