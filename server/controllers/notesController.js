@@ -4,6 +4,9 @@ import NoteModel from "../models/note.js";
 
 export const showAllNotes= async (req, res)=>{
 
+    // console.log(req.headers.token);
+    
+
     const userId = req.userId
 
     const notes = await NoteModel.find({user:userId})

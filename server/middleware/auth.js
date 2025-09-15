@@ -5,6 +5,8 @@ dotenv.config();
 const JWT_SECRET = process.env.JWT_SECRET;
 
 export const userAuth = (req, res, next)=>{
+    console.log(req.headers.token);
+    
     const token = req.headers.token;
 
     const decoded = jwt.verify(token, JWT_SECRET) 

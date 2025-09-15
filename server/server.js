@@ -33,10 +33,10 @@ app.post("/login", handleLogin)
 app.get("/notes/",userAuth, showAllNotes) 
 
 
-app.post("/notes", createNote) 
+app.post("/notes",userAuth, createNote) 
 
 app.patch("/notes/:id",userAuth, updateNote) 
-
+,
 app.delete("/notes/:id",userAuth, deleteNote) 
 
 
