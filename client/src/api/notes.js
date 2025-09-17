@@ -12,14 +12,14 @@ async function getNotes(){
 }
 
 async function editOrDeleteNotes(name, id, editedNote){
-    // if (name=="edit"){
-    //     const response = await axios.
-    // }else if(name=="delete"){
-    //     const response = await axios.delete(`/notes/${id}`)
-    // }
-    // const response = await axios.delete(`/notes/${id}`)
-    const response = await axios.patch(`/notes/${id}`, editedNote)
-    return response
+    if (name=="edit"){
+        const response = await axios.patch(`/notes/${id}`, editedNote);
+        return response
+        
+    }else if(name=="delete"){
+        const response = await axios.delete(`/notes/${id}`)
+        return response
+    }
 }
 
 export default submitNote;

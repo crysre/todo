@@ -79,7 +79,7 @@ function Note({title, body, id, setNotes}){
     async function handleClick(e){
 
         console.log("I've been clicked",e.target.name, id)
-        const name = e.target.name;
+        const name = "delete";
         
         const response = await editOrDeleteNotes(name, id)
 

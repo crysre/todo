@@ -3,7 +3,7 @@ import Login from "./Components/login"
 import Navbar from "./Components/Navbar"
 import Notes from "./Components/Notes"
 import Signup from "./Components/Signup"
-import {BrowserRouter, Routes, Route, Link, useNavigate, Outlet} from "react-router-dom"
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 
 
 
@@ -16,8 +16,9 @@ function App() {
 
 
   return <div className="flex flex-col items-center" >
-  <Navbar/>
+  
   <BrowserRouter>
+    <Navbar/>
   <Routes>
     <Route path="/login" element={<Login/>} />
     <Route path="/Signup" element={<Signup/>} />
