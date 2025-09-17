@@ -3,6 +3,8 @@ import { editOrDeleteNotes, getNotes } from "../api/notes";
 import { useState } from "react";
 import DeleteIcon from "../assets/deleteIcon";
 import EditIcon from "../assets/editIcon";
+import SendIcon from "../assets/SendIcon";
+import CancelIcon from "../assets/CancelIcon";
 // import {ReactComponent as editImage} from "../assets/edit-svgrepo-com.svg";
 
 
@@ -42,9 +44,6 @@ function Note({title, body, id, setNotes}){
 
     function handleEdit(){
 
-        console.log(title, body);
-        
-
             setEditing((x)=>!x)
             
     }
@@ -61,6 +60,20 @@ function Note({title, body, id, setNotes}){
             }
 
         })
+    }
+
+    async function sendEditedNotes(){
+        const name = "edit"
+        const response = await editOrDeleteNotes(name, id, editedNote )
+        console.log(response);
+        handleEdit()
+          if (response.status === 200) {
+    setNotes((prevNotes) =>
+      prevNotes.map((note) =>
+        note._id === id ? { ...note, ...editedNote } : note
+      )
+    );
+  }
     }
     
     async function handleClick(e){
@@ -88,10 +101,9 @@ function Note({title, body, id, setNotes}){
         </>}
         
 
-        {/* {isEditing?<Cancel></Cancel>:<DeleteIcon onClick={handleClick} name="delete" className=" hover:text-red-600 float-right h-5"/>} */}
+        {isEditing?<CancelIcon onClick={handleEdit} name="edit" className=" hover:text-red-600 float-right h-5" />:<DeleteIcon onClick={handleClick} name="delete" className=" hover:text-red-600 float-right h-5"/>}
 
-        {/* {isEditing?<Send></Send>:<EditIcon onClick={handleEdit} name="edit" className=" hover:text-blue-800 float-right h-5"  />} */}
-
+        {isEditing?<SendIcon onClick={sendEditedNotes} name="edit" className=" hover:text-blue-800 float-right h-5" />:<EditIcon onClick={handleEdit} name="edit" className=" hover:text-blue-800 float-right h-5"  />}
 
     </div>
 }

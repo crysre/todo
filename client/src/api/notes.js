@@ -11,13 +11,14 @@ async function getNotes(){
     return response
 }
 
-async function editOrDeleteNotes(name, id){
+async function editOrDeleteNotes(name, id, editedNote){
     // if (name=="edit"){
     //     const response = await axios.
     // }else if(name=="delete"){
-    //     const response = await axios.delete
+    //     const response = await axios.delete(`/notes/${id}`)
     // }
-    const response = await axios.delete(`/notes/${id}`)
+    // const response = await axios.delete(`/notes/${id}`)
+    const response = await axios.patch(`/notes/${id}`, editedNote)
     return response
 }
 
