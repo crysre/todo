@@ -13,7 +13,7 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    origin:"https://todofrontend-rose.vercel.app/",
+    origin:"https://todofrontend-rose.vercel.app",
     methods:["GET", "POST","PATCH", "PUT", "DELETE"],
     credentials: true
 }));
