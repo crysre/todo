@@ -1,10 +1,10 @@
 import { useState } from "react"
 import Create from "./Components/CreateNote"
-import Login from "./Components/login"
 import Navbar from "./Components/Navbar"
 import Notes from "./Components/Notes"
 import Signup from "./Components/Signup"
 import {BrowserRouter, Routes, Route} from "react-router-dom"
+import Login from "./Components/Login"
 
 
 
@@ -14,7 +14,6 @@ const [notes, setNotes] = useState([]);
 
 
   return <div className="flex flex-col items-center" >
-  
   <BrowserRouter>
     <Navbar/>
   <Routes>
