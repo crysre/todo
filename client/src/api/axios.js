@@ -1,5 +1,6 @@
 import axios from "axios";
 
+const port = import.meta.env.VITE_API_URL;
 const token = localStorage.getItem("token")
 
 function isToken(){
@@ -16,7 +17,7 @@ function logOut(){
 
 
 const instance = axios.create({
-    baseURL:"http://localhost:3000"
+    baseURL:`${port}`
 })
 
 if(token){
