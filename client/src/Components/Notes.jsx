@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { editOrDeleteNotes, getNotes } from "../api/notes";
 import { useState } from "react";
 import DeleteIcon from "../assets/DeleteIcon";
-import EditIcon from "../assets/EditIcon";
+import EditIcon from "../assets/EditingIcon";
 import SendIcon from "../assets/SendIcon";
 import CancelIcon from "../assets/CancelIcon";
 // import {ReactComponent as editImage} from "../assets/edit-svgrepo-com.svg";
