@@ -1,7 +1,10 @@
 import { useState } from "react";
 import handleSignup from "../api/auth";
+import { useNavigate } from "react-router-dom";
 
 function Signup(){
+
+    const navigate = useNavigate()
 
     const [data, setData] = useState({
         firstName:"",
@@ -24,8 +27,11 @@ function Signup(){
         
     }
 
-    function handleClick(){
-        handleSignup(data)
+    async function handleClick(){
+        await handleSignup(data)
+        
+        navigate("/login")
+        
     }
 
 

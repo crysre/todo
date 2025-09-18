@@ -1,9 +1,11 @@
 import { useState } from "react";
-import submitNote from "../api/notes";
+import submitNote, { getNotes } from "../api/notes";
 
 
 
-function Create(){
+
+
+function Create({ notes, setNotes}){
 
     const [note, setNote] = useState({
         title:"",
@@ -11,8 +13,23 @@ function Create(){
     });
 
     async function handleClick(){
-        await submitNote(note)
-        
+        await submitNote(note);
+
+        setNote({
+        title:"",
+        body:""
+    })
+
+      async function fetchNotes(){
+            const response = await getNotes();
+            setNotes(response.data.notes)
+
+        }
+
+        fetchNotes()
+    
+
+    
     }
 
     function handleChange(e){
@@ -43,8 +60,8 @@ function Create(){
 
     return <div className=" mt-8 rounded-xl w-100 flex flex-col bg-gray-500">
             <form className=" p-5 flex flex-col gap-2" >
-                <input onChange={handleChange} name="title" className=" p-3 rounded-xl outline-none bg-gray-200 "  placeholder="title"/>
-                <textarea onChange={handleChange} name="body" className=" p-3 resize-none rounded-xl outline-none bg-gray-200"  placeholder="body" rows="3"/>
+                <input value={note.title}  onChange={handleChange} name="title" className=" p-3 rounded-xl outline-none bg-gray-200 "  placeholder="title"/>
+                <textarea value={note.body} onChange={handleChange} name="body" className=" p-3 resize-none rounded-xl outline-none bg-gray-200"  placeholder="body" rows="3"/>
                 <button onClick={handleClick} type="button"  className=" self-baseline-last w-16 rounded bg-blue-800">Add</button>
             </form>
     </div>

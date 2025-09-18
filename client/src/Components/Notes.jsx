@@ -8,9 +8,9 @@ import CancelIcon from "../assets/CancelIcon";
 // import {ReactComponent as editImage} from "../assets/edit-svgrepo-com.svg";
 
 
-function Notes(){
+function Notes({ notes, setNotes}){
 
-    const [notes, setNotes] = useState([]);
+    // const [notes, setNotes] = useState([]);
 
     useEffect(()=>{
         async function fetchNotes(){
@@ -94,7 +94,7 @@ function Note({title, body, id, setNotes}){
     return <div className=" px-2 shadow-2xl float-left mx-5 my-5 rounded-xl p-2 w-60 bg-gray-200" >
         {isEditing?
         <>
-        <input name="title" onChange={editChange} value={editedNote.title} className="text-black" /><input onChange={editChange} name="body" value={editedNote.body} className="text-black"/>
+        <input autoComplete="off" name="title" onChange={editChange} value={editedNote.title} className=" outline-none text-black" /><input autoComplete="off" onChange={editChange} name="body" value={editedNote.body} className="outline-none text-black"/>
         </>
         :<>
         <h1 className="text-black" >{title}</h1><p className="text-black" >{body}</p>

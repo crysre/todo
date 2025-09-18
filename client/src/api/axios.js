@@ -1,6 +1,19 @@
 import axios from "axios";
+import { useState } from "react";
 
 const token = localStorage.getItem("token")
+
+function isToken(){
+    if(token){
+        return true
+    }else{
+        return false
+    }
+}
+
+function logOut(){
+    localStorage.setItem("token", "")
+}
 
 
 const instance = axios.create({
@@ -14,3 +27,4 @@ if(token){
 console.log(instance);
 
 export default instance;
+export {isToken, logOut};
