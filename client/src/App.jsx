@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Create from "./Components/Create"
+import Create from "./Components/CreateNote"
 import Login from "./Components/login"
 import Navbar from "./Components/Navbar"
 import Notes from "./Components/Notes"
