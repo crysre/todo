@@ -12,7 +12,7 @@ import {createNote,updateNote,deleteNote, showAllNotes} from "./controllers/note
 dotenv.config();
 
 const app = express();
-const port = process.env.port;
+const port = process.env.PORT || 3000;
 app.use(express.json())
 app.use(cors());
 
