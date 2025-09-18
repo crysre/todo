@@ -29,6 +29,9 @@ function Login(){
     }
 
     async function handleClick(){
+
+        try{
+            
         await handleLogin(data)
         setData({
         email:"",
@@ -37,7 +40,9 @@ function Login(){
 
     navigate("/")
     reloadPage()
-    
+        }catch(e){
+            console.log("Login failed ", e)
+        }
 
     }
 

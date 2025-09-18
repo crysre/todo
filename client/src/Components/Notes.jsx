@@ -63,7 +63,8 @@ function Note({title, body, id, setNotes}){
     }
 
     async function sendEditedNotes(){
-        const name = "edit"
+   try{
+         const name = "edit"
         const response = await editOrDeleteNotes(name, id, editedNote )
         console.log(response);
         handleEdit()
@@ -74,11 +75,16 @@ function Note({title, body, id, setNotes}){
       )
     );
   }
+   }catch(e){
+    console.log("editing notes failed", e)
+   }
     }
     
-    async function handleClick(e){
+    async function deleteNotes(e){
+        try{
+            
 
-        console.log("I've been clicked",e.target.name, id)
+        console.log("I've been clicked", id)
         const name = "delete";
         
         const response = await editOrDeleteNotes(name, id)
@@ -88,7 +94,9 @@ function Note({title, body, id, setNotes}){
         })
 
         console.log("I'm response", response.status);
-        
+        }catch(e){
+            console.log("delete notes failed ", e)
+        }
     }
 
     return <div className=" px-2 shadow-2xl float-left mx-5 my-5 rounded-xl p-2 w-60 bg-gray-200" >
@@ -101,7 +109,7 @@ function Note({title, body, id, setNotes}){
         </>}
         
 
-        {isEditing?<CancelIcon onClick={handleEdit} name="edit" className=" hover:text-red-600 float-right h-5" />:<DeleteIcon onClick={handleClick} name="delete" className=" hover:text-red-600 float-right h-5"/>}
+        {isEditing?<CancelIcon onClick={handleEdit} name="edit" className=" hover:text-red-600 float-right h-5" />:<DeleteIcon onClick={deleteNotes} name="delete" className=" hover:text-red-600 float-right h-5"/>}
 
         {isEditing?<SendIcon onClick={sendEditedNotes} name="edit" className=" hover:text-blue-800 float-right h-5" />:<EditIcon onClick={handleEdit} name="edit" className=" hover:text-blue-800 float-right h-5"  />}
 

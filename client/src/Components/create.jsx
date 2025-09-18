@@ -13,7 +13,8 @@ function Create({ notes, setNotes}){
     });
 
     async function handleClick(){
-        await submitNote(note);
+    try{
+            await submitNote(note);
 
         setNote({
         title:"",
@@ -28,6 +29,9 @@ function Create({ notes, setNotes}){
 
         fetchNotes()
     
+    }catch(e){
+        console.log("Creating notes failed ", e)
+    }
 
     
     }

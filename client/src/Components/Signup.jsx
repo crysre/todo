@@ -28,9 +28,15 @@ function Signup(){
     }
 
     async function handleClick(){
+
+        try{
+            
         await handleSignup(data)
         
         navigate("/login")
+        }catch(e){
+            console.log("Signed up failed ", e)
+        }
         
     }
 
